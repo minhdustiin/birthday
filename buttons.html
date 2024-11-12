@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find the Correct Button</title>
+    <style>
+        @font-face {
+            font-family: 'newFont';
+            src:
+                 url('fonts/newFont.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'newFont'; /* Applied the custom font */
+            background-color: #c095e7;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+            width: 60%;
+            height: 60%;
+        }
+
+        .button-grid2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+            width: 60%;
+            height: 60%;
+            margin-right: -1%;
+            
+        }
+
+        .button-grid3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+            width: 60%;
+            height: 60%;
+            margin-right: -1%;
+            
+        }
+        .button-grid4 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+            width: 60%;
+            height: 60%;
+            margin-right: -1%;
+            
+        }
+        .button-grid5 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+            width: 60%;
+            height: 60%;
+            margin-right: -1%;
+            
+        }
+        .button-grid6 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+            width: 60%;
+            height: 60%;
+            margin-right: -1%;
+            
+        }
+
+        .button-grid7 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+            width: 60%;
+            height: 60%;
+            margin-right: -1%;
+            
+        }
+        .button-grid8 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+            width: 60%;
+            height: 60%;
+            margin-right: -1%;
+            
+        }
+
+        .button-grid9 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+            width: 60%;
+            height: 60%;
+            margin-right: -1%;
+            
+        }
+        .button-grid10 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+            width: 60%;
+            height: 60%;
+            margin-right: -1%;
+            
+        }
+
+        .button-grid11 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+            width: 60%;
+            height: 60%;
+            margin-right: -1%;
+            
+        }
+        .button-grid12 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+            width: 60%;
+            height: 60%;
+            margin-right: -1%;
+            
+        }
+        .button-grid13 {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 10px;
+            width: 60%;
+            height: 60%;
+            margin-right: -1%;
+            
+        }
+
+        button {
+            padding: 20px;
+            width: 10%;
+            background-color: #ccc;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #bbb;
+        }
+
+        .wrong-message {
+            position: absolute;
+            top: 10%;
+            font-size: 48px;
+            color: black;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .right-message {
+            position: absolute;
+            top: 10%;
+            font-size: 48px;
+            color: black;
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        .fade-out {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="button-grid">
+        <!-- Multiple buttons with no labels -->
+        
+        <button onclick="checkButton(true)"></button> <!-- Correct button -->
+        
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <!-- Add more buttons as needed -->
+        <!-- For example, to fully fill the page, you can duplicate these lines -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+    </div>
+
+    <div class="button-grid2">
+        <!-- Multiple buttons with no labels -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(true)"></button> <!-- Correct button -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <!-- Add more buttons as needed -->
+        <!-- For example, to fully fill the page, you can duplicate these lines -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+    </div>
+
+    <div class="button-grid3">
+        <!-- Multiple buttons with no labels -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button> <!-- Correct button -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <!-- Add more buttons as needed -->
+        <!-- For example, to fully fill the page, you can duplicate these lines -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+    </div>
+    <div class="button-grid4">
+        <!-- Multiple buttons with no labels -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button> <!-- Correct button -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <!-- Add more buttons as needed -->
+        <!-- For example, to fully fill the page, you can duplicate these lines -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+    </div>
+    <div class="button-grid5">
+        <!-- Multiple buttons with no labels -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button> <!-- Correct button -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <!-- Add more buttons as needed -->
+        <!-- For example, to fully fill the page, you can duplicate these lines -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+    </div>
+    <div class="button-grid6">
+        <!-- Multiple buttons with no labels -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button> <!-- Correct button -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <!-- Add more buttons as needed -->
+        <!-- For example, to fully fill the page, you can duplicate these lines -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+    </div>
+    <div class="button-grid7">
+        <!-- Multiple buttons with no labels -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button> <!-- Correct button -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <!-- Add more buttons as needed -->
+        <!-- For example, to fully fill the page, you can duplicate these lines -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+    </div>
+    <div class="button-grid8">
+        <!-- Multiple buttons with no labels -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button> <!-- Correct button -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <!-- Add more buttons as needed -->
+        <!-- For example, to fully fill the page, you can duplicate these lines -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+    </div>
+    <div class="button-grid9">
+        <!-- Multiple buttons with no labels -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button> <!-- Correct button -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <!-- Add more buttons as needed -->
+        <!-- For example, to fully fill the page, you can duplicate these lines -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+    </div>
+    <div class="button-grid10">
+        <!-- Multiple buttons with no labels -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button> <!-- Correct button -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <!-- Add more buttons as needed -->
+        <!-- For example, to fully fill the page, you can duplicate these lines -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+    </div>
+    <div class="button-grid11">
+        <!-- Multiple buttons with no labels -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button> <!-- Correct button -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <!-- Add more buttons as needed -->
+        <!-- For example, to fully fill the page, you can duplicate these lines -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+    </div>
+    <div class="button-grid12">
+        <!-- Multiple buttons with no labels -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button> <!-- Correct button -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <!-- Add more buttons as needed -->
+        <!-- For example, to fully fill the page, you can duplicate these lines -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+    </div>
+    <div class="button-grid13">
+        <!-- Multiple buttons with no labels -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button> <!-- Correct button -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <!-- Add more buttons as needed -->
+        <!-- For example, to fully fill the page, you can duplicate these lines -->
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+        <button onclick="checkButton(false)"></button>
+    </div>
+    
+
+
+    <!-- Message for wrong answer -->
+    <div id="wrongMessage" class="wrong-message">Hehe... WRONG.</div>
+
+    <!-- Message for right answer -->
+    <div id="rightMessage" class="right-message">Wow! Good job!</div>
+
+<script>
+    function checkButton(isCorrect) {
+        const wrongMessage = document.getElementById('wrongMessage');
+        const rightMessage = document.getElementById('rightMessage');
+
+        if (isCorrect) {
+            rightMessage.classList.add('fade-out'); // Apply fade-out effect
+
+            setTimeout(() => {
+                rightMessage.classList.remove('fade-out'); // Hide right message after 5 seconds
+            }, 5000);
+
+            // Wait for 20 seconds before redirecting
+            setTimeout(() => {
+                window.location.href = 'success.html'; // Redirect to next page after 20 seconds
+            }, 2000); // 20 seconds delay before redirection
+        } else {
+            wrongMessage.classList.add('fade-out'); // Show wrong message
+
+            setTimeout(() => {
+                wrongMessage.classList.remove('fade-out'); // Hide wrong message after 0.5 seconds
+            }, 500); // 0.5 second fade-out effect for wrong message
+        }
+    }
+</script>
+</body>
+</html>
