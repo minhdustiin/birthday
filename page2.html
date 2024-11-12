@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reaction Time Test</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+      }
+
+      .clickable-area {
+        height: 100vh;
+        width: 100%;
+        cursor: pointer;
+        background: limegreen;
+        display: grid;
+        place-items: center;
+        font-size: 32px;
+        font-family: "Roboto", sans-serif;
+        color: #fff;
+        user-select: none; /* Prevent text selection */
+      }
+
+      .end-screen,
+      .main-menu {
+        display: none;
+        position: fixed;
+        height: 100vh;
+        width: 100%;
+        top: 0;
+        left: 0;
+        background: #c095e7;
+        color: #fff;
+        font-family: "Roboto", sans-serif;
+        text-align: center;
+        user-select: none; /* Prevent text selection */
+      }
+
+      .main-menu.active,
+      .end-screen.active {
+        display: grid;
+        place-items: center;
+      }
+
+      .main-menu {
+        cursor: pointer;
+      }
+
+      .container {
+        max-width: 700px;
+        padding: 0 32px;
+      }
+
+      .main-menu h1 {
+        font-size: 70px;
+        margin: 8px 0;
+      }
+
+      .container p {
+        font-size: 20px;
+        line-height: 2;
+        font-weight: 800;
+        margin: 0;
+      }
+
+      .end-screen h1 {
+        font-size: 30px;
+      }
+
+      .reaction-time-text {
+        font-size: 100px;
+        font-weight: 900;
+      }
+
+      .end-screen .play-again-btn,
+      .end-screen .continue-btn {
+        border: none;
+        background: #faf0ca;
+        font-size: 20px;
+        padding: 8px 32px;
+        margin-top: 20px;
+        text-transform: uppercase;
+        font-weight: 900;
+        letter-spacing: 4px;
+        cursor: pointer;
+      }
+
+      .clickable-area .message {
+        user-select: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="end-screen">
+      <div class="container">
+        <h1>Kami's Personal Reaction Time Test!</h1>
+        <div class="reaction-time-text">234 ms</div>
+        <div class="message-text"></div> <!-- New div for the message -->
+        <button class="play-again-btn">Play Again</button>
+        <button class="continue-btn" style="display: none;">Continue</button>
+      </div>
+    </div>
+
+    <div class="main-menu active">
+      <div class="container">
+        <h1>Kami's Reaction Time Test!</h1>
+        <p>Welcome to the next puzzle... Try to get an average of 220 and below to continue... Goodluck!</p>
+        <p>Click anywhere to start.</p>
+      </div>
+    </div>
+
+    <div class="clickable-area">
+      <div class="message">Click Now!</div>
+    </div>
+
+    <script>
+      const mainMenu = document.querySelector(".main-menu");
+      const clickableArea = document.querySelector(".clickable-area");
+      const message = document.querySelector(".clickable-area .message");
+      const endScreen = document.querySelector(".end-screen");
+      const reactionTimeText = document.querySelector(
+        ".end-screen .reaction-time-text"
+      );
+      const messageText = document.querySelector(".end-screen .message-text"); // New div for the message
+      const playAgainBtn = document.querySelector(".end-screen .play-again-btn");
+      const continueBtn = document.querySelector(".end-screen .continue-btn");
+
+      let timer;
+      let greenDisplayed;
+      let timeNow;
+      let waitingForStart;
+      let waitingForGreen;
+      let scores;
+
+      const init = () => {
+        greenDisplayed = false;
+        waitingForStart = false;
+        waitingForGreen = false;
+        scores = [];
+      };
+
+      init();
+
+      const setGreenColor = () => {
+        clickableArea.style.backgroundColor = "#32cd32";
+        message.innerHTML = "Click Now!";
+        message.style.color = "#111";
+        greenDisplayed = true;
+        timeNow = Date.now();
+      };
+
+      const startGame = () => {
+        clickableArea.style.backgroundColor = "#c1121f";
+        
+        message.innerHTML = "Wait for green... Ms. Antsy Pantsy Kami";
+        message.style.color = "#fff";
+
+        let randomNumber = Math.floor(Math.random() * 4000 + 3000);
+        timer = setTimeout(setGreenColor, randomNumber);
+
+        waitingForStart = false;
+        waitingForGreen = true;
+      };
+
+      mainMenu.addEventListener("click", () => {
+        mainMenu.classList.remove("active");
+        startGame();
+      });
+
+      const endGame = () => {
+        endScreen.classList.add("active");
+        clearTimeout(timer);
+
+        let total = 0;
+
+        scores.forEach((s) => {
+          total += s;
+        });
+
+        let averageScore = Math.round(total / scores.length);
+
+        reactionTimeText.innerHTML = `${averageScore} ms`;
+
+        // Show appropriate message based on average score
+        if (averageScore < 210) {
+          messageText.innerHTML = "WOWZA!! this is why ur the best ever what other girl in this world gonna be this fast omg"; // Message for fast users
+          playAgainBtn.style.display = "none";
+          continueBtn.style.display = "inline-block";
+        } else {
+          messageText.innerHTML = "its okay slow poke try again!!!"; // Message for slower users
+          playAgainBtn.style.display = "inline-block";
+          continueBtn.style.display = "none";
+        }
+      };
+
+      const displayReactionTime = (rt) => {
+        clickableArea.style.backgroundColor = "#faf0ca";
+        message.innerHTML = `<div class='reaction-time-text'>${rt} ms</div>Click to continue.`;
+        greenDisplayed = false;
+        waitingForStart = true;
+        scores.push(rt);
+
+        if (scores.length >= 3) {
+          endGame();
+        }
+      };
+
+      const displayTooSoon = () => {
+        clickableArea.style.backgroundColor = "#faf0ca";
+        message.innerHTML = "Chillax dud be patient the green aint running away from u";
+        message.style.color = "#111";
+        waitingForStart = true;
+        clearTimeout(timer);
+      };
+
+      clickableArea.addEventListener("mousedown", () => {
+        if (greenDisplayed) {
+          let clickTime = Date.now();
+          let reactionTime = clickTime - timeNow;
+          displayReactionTime(reactionTime);
+          return;
+        }
+
+        if (waitingForStart) {
+          startGame();
+          return;
+        }
+
+        if (waitingForGreen) {
+          displayTooSoon();
+        }
+      });
+
+      playAgainBtn.addEventListener("click", () => {
+        window.location.href = 'page2.html';
+      });
+
+      continueBtn.addEventListener("click", () => {
+        window.location.href = 'page3.html';
+      });
+    </script>
+  </body>
+</html>
