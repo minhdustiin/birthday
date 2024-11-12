@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What do you refer to him as?</title>
+    <style>
+        @font-face {
+            font-family: 'newFont';
+            src:
+                 url('fonts/newFont.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body { 
+            text-align: center; 
+            margin-top: 20%; 
+            background-color: #c095e7;
+            font-family: 'newFont'; /* Applied the custom font */
+        }
+        input { padding: 10px; width: 200px; }
+        button { padding: 10px 20px; margin-top: 20px; cursor: pointer; }
+        #hint {
+            color: red; 
+            font-weight: bold;
+            font-size: 50px; /* Adjust the font size */
+        }
+    </style>
+</head>
+<body>
+    <h1 id="nameHeading"></h1>
+    <input type="text" id="referInput" placeholder="Your Answer" required>
+    <br>
+    <button onclick="checkAnswer()">Next</button>
+    <p id="hint" style="color: red; font-weight: bold;"></p>
+
+    <script>
+        document.getElementById('nameHeading').innerText = localStorage.getItem('name') + ", what do you refer to him as?";
+        
+        let attemptCount = 0;
+
+        function checkAnswer() {
+            const answer = document.getElementById('referInput').value.trim().toLowerCase();
+
+            if (answer == 'master') {
+                window.location.href = 'buttons.html';
+            } else {
+                attemptCount++;
+                if (attemptCount === 1) {
+                    document.getElementById('hint').textContent = "Wrong.";
+                }
+                else if (attemptCount === 2) {
+                    document.getElementById('hint').textContent = "Hint: Starts with M";
+                } else if (attemptCount === 3) {
+                    document.getElementById('hint').textContent = "Hint: He's Dominant...";
+                } else {
+                    document.getElementById('hint').textContent = "Hint: Dud... c'mon..";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
