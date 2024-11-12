@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enter Your Name</title>
+    <style>
+        @font-face {
+            font-family: 'newFont';
+            src: url('fonts/newFont.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body { 
+            text-align: center; 
+            margin-top: 20%; 
+            font-family: 'newFont';
+            background-color: #c095e7;
+        }
+        input { padding: 10px; width: 200px; }
+        button { padding: 10px 20px; margin-top: 20px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Enter Your Name!</h1>
+    <input type="text" id="userName" placeholder="Your Name" required>
+    <br>
+    <button onclick="goToNextPage()">Next</button>
+
+    <script>
+        function goToNextPage() {
+            const userName = document.getElementById('userName').value;
+            if (userName.trim() !== '') {
+                localStorage.setItem('name', userName);
+                window.location.href = 'refer.html';
+            } else {
+                alert('Please enter your name');
+            }
+        }
+    </script>
+</body>
+</html>
