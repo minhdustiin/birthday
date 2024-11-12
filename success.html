@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Game</title>
+    <style>
+        @font-face {
+            font-family: 'newFont';
+            src:
+                 url('fonts/newFont.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'newFont'; /* Applied the custom font */
+            background-color: #c095e7;
+            margin: 0;
+
+        }
+
+        #gameContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #snakeGame {
+            background-color: #000;
+            border: 2px solid #333;
+        }
+
+        #score {
+            font-size: 20px;
+            color: #333;
+            margin: 20px 0;
+        }
+
+        #message {
+            font-size: 18px;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        #tryAgain {
+            display: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #ff69b4; /* Pink color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <canvas id="snakeGame" width="400" height="400"></canvas>
+        <div id="score">Score: 0</div>
+        <div id="message"></div>
+        <button id="tryAgain" onclick="document.location.reload()">Try Again?</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('snakeGame');
+        const ctx = canvas.getContext('2d');
+        const scoreDisplay = document.getElementById('score');
+        const messageDisplay = document.getElementById('message');
+        const tryAgainButton = document.getElementById('tryAgain');
+
+        const boxSize = 20;
+        let snake = [{ x: 200, y: 200 }];
+        let direction = { x: 0, y: 0 };
+        let apple = { x: Math.floor(Math.random() * 20) * boxSize, y: Math.floor(Math.random() * 20) * boxSize };
+        let score = 0;
+        let allowDirectionChange = true;
+
+        function showMessage(text, duration) {
+            messageDisplay.textContent = text;
+            setTimeout(() => {
+                messageDisplay.textContent = '';
+            }, duration);
+        }
+
+        function drawBox(x, y, color) {
+            ctx.fillStyle = color;
+            ctx.fillRect(x, y, boxSize, boxSize);
+        }
+
+        function moveSnake() {
+            const head = { x: snake[0].x + direction.x * boxSize, y: snake[0].y + direction.y * boxSize };
+            snake.unshift(head);
+
+            if (head.x === apple.x && head.y === apple.y) {
+                score++;
+                scoreDisplay.textContent = `Score: ${score}`;
+                apple = { x: Math.floor(Math.random() * 20) * boxSize, y: Math.floor(Math.random() * 20) * boxSize };
+
+                // Milestone messages
+                if (score === 5) {
+                    showMessage("Heh... 30 more to go... Kami...", 5000);
+                } else if (score === 19) {
+                    showMessage("Hey! This is how old ur turning!", 5000);
+                } else if (score === 2) {
+                    showMessage("Congrats you did it! onto the next Lol", 10000);
+                    setTimeout(() => {
+                        window.location.href = 'page2.html';
+                    }, 2000);
+                }
+            } else {
+                snake.pop();
+            }
+            allowDirectionChange = true; // Allow direction change after snake moves
+        }
+
+        function checkCollision() {
+            const head = snake[0];
+
+            // Wall collision
+            if (head.x < 0 || head.y < 0 || head.x >= canvas.width || head.y >= canvas.height) {
+                return true;
+            }
+
+            // Self-collision
+            for (let i = 1; i < snake.length; i++) {
+                if (head.x === snake[i].x && head.y === snake[i].y) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Draw apple
+            drawBox(apple.x, apple.y, 'red');
+
+            // Draw snake
+            for (let i = 0; i < snake.length; i++) {
+                drawBox(snake[i].x, snake[i].y, 'green');
+            }
+        }
+
+        function update() {
+            moveSnake();
+            if (checkCollision()) {
+                scoreDisplay.textContent = `NOOB! TRY AGAIN!`;
+                tryAgainButton.style.display = 'block'; // Show "Try Again" button
+                clearInterval(gameInterval); // Stop the game loop
+            } else {
+                draw();
+            }
+        }
+
+        function changeDirection(event) {
+            if (!allowDirectionChange) return; // Prevent direction change if already changed in the same frame
+
+            const key = event.key.toLowerCase();
+            if (key === 'a' && direction.x === 0) { // Left (A)
+                direction = { x: -1, y: 0 };
+            } else if (key === 'w' && direction.y === 0) { // Up (W)
+                direction = { x: 0, y: -1 };
+            } else if (key === 'd' && direction.x === 0) { // Right (D)
+                direction = { x: 1, y: 0 };
+            } else if (key === 's' && direction.y === 0) { // Down (S)
+                direction = { x: 0, y: 1 };
+            }
+            allowDirectionChange = false; // Block further direction changes until next frame
+        }
+
+        document.addEventListener('keydown', changeDirection);
+
+        const gameInterval = setInterval(update, 100); // Game loop every 100ms
+    </script>
+</body>
+</html>
