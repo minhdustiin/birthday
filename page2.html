@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Reaction Time Test</title>
+    <title>Kami's Bday</title>
     <style>
       * {
         box-sizing: border-box;
@@ -110,7 +110,7 @@
     <div class="main-menu active">
       <div class="container">
         <h1>Kami's Reaction Time Test!</h1>
-        <p>Welcome to the next puzzle... Try to get an average of 220 and below to continue... Goodluck!</p>
+        <p>Welcome to the next puzzle... Try to get an average of 220 and below within 3 tries heheh... Goodluck!</p>
         <p>Click anywhere to start.</p>
       </div>
     </div>
@@ -200,7 +200,7 @@
       };
 
       const displayReactionTime = (rt) => {
-        clickableArea.style.backgroundColor = "#faf0ca";
+        clickableArea.style.backgroundColor = "#c095e7";
         message.innerHTML = `<div class='reaction-time-text'>${rt} ms</div>Click to continue.`;
         greenDisplayed = false;
         waitingForStart = true;
@@ -212,7 +212,7 @@
       };
 
       const displayTooSoon = () => {
-        clickableArea.style.backgroundColor = "#faf0ca";
+        clickableArea.style.backgroundColor = "#c095e7";
         message.innerHTML = "Chillax dud be patient the green aint running away from u";
         message.style.color = "#111";
         waitingForStart = true;
@@ -242,7 +242,7 @@
       });
 
       continueBtn.addEventListener("click", () => {
-        window.location.href = 'page3.html';
+        window.location.href = 'pageWPM.html';
       });
     </script>
   </body>
