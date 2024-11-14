@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kami's Bday</title>
+    <style>
+        @font-face {
+            font-family: 'newFont';
+            src: url('fonts/newFont.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body { 
+            font-family: 'newFont';
+            background-color: #c095e7;
+            color: #4d2a7f;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .section {
+            text-align: center;
+            padding: 100px 0;
+            margin: 50px 0;
+            font-size: 2em;
+        }
+        button {
+    padding: 15px 30px;
+    font-family: 'newFont';
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #7a4ea3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+button:hover {
+    background-color: #5a3775;
+}
+
+    </style>
+</head>
+<body>
+    <div class="section">
+        <p>It's been</p>
+        <span id="years">0</span> years since 2020.
+    </div>
+    <div class="section">
+        <p>It's been</p>
+        <span id="months">0</span> months since December 17, 2020.
+    </div>
+    <div class="section">
+        <p>It's been</p>
+        <span id="weeks">0</span> weeks since December 17, 2020.
+    </div>
+    <div class="section">
+        <p>It's been</p>
+        <span id="days">0</span> days since December 17, 2020.
+    </div>
+    <div class="section">
+        <p>It's been</p>
+        <span id="hours">0</span> hours since December 17, 2020.
+    </div>
+    <div class="section">
+        <p>It's been</p>
+        <span id="minutes">0</span> minutes since December 17, 2020.
+    </div>
+    <div class="section">
+        <p>It's been</p>
+        <span id="seconds">0</span> seconds since December 17, 2020.
+    </div>
+    <div class="section">
+        <p>It's been</p>
+        <span id="milliseconds">0</span> milliseconds since December 17, 2020.
+    </div>
+    <div class="section">
+        <p>Since the day I met and fell in love with you, Kami.</p>
+        <button onclick="window.location.href='pageintro.html'">Next</button>
+    </div>
+    
+
+    <script>
+        const targetDate = new Date('2020-12-17T00:00:00');
+        const updateTime = () => {
+            const now = new Date();
+            const diff = now - targetDate;
+
+            const years = Math.floor(diff / (1000 * 60 * 60 * 24 * 365));
+            const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30.44));
+            const weeks = Math.floor(diff / (1000 * 60 * 60 * 24 * 7));
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor(diff / (1000 * 60));
+            const seconds = Math.floor(diff / 1000);
+            const milliseconds = diff;
+
+            // Update each element with commas in the numbers
+            document.getElementById('years').innerText = years.toLocaleString();
+            document.getElementById('months').innerText = months.toLocaleString();
+            document.getElementById('weeks').innerText = weeks.toLocaleString();
+            document.getElementById('days').innerText = days.toLocaleString();
+            document.getElementById('hours').innerText = hours.toLocaleString();
+            document.getElementById('minutes').innerText = minutes.toLocaleString();
+            document.getElementById('seconds').innerText = seconds.toLocaleString();
+            document.getElementById('milliseconds').innerText = milliseconds.toLocaleString();
+        };
+
+        updateTime();
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>
