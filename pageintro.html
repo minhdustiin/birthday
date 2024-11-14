@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kami's Bday</title>
+  <style>
+    body {
+      background-image: url('https://cdn.discordapp.com/attachments/1138934111201923132/1306372433883959496/finishedRoom2.png?ex=67366da3&is=67351c23&hm=46fdef1b8308ba0a36a54fe202146db0b04f9c5eb643d0af7e4ad6789bf0110a&'); /* Background Image */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+    /* Chatbox at the bottom */
+    .chatbox {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(to top, black, white); /* Black to white gradient */
+      opacity: 0.9; /* Semi-transparent */
+      color: white;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.5em;
+      text-align: center;
+      border-top: 2px solid #ddd; /* Optional border for style */
+    }
+
+    /* Hide text initially */
+    .chatbox span {
+      margin: 0;
+      font-family: 'Courier New', Courier, monospace;
+      overflow: hidden;
+      display: inline-block;
+      white-space: nowrap;
+    }
+
+    /* Button styling */
+    #actionButton {
+      position: fixed;
+      top: 500px;
+      left: 440px;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      background-color: #4CAF50;
+      opacity: 0;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+    #actionButton:hover {
+      background-color: #45a049;
+    }
+    /* Style for the new screen */
+    .newScreen {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    width: 80%;  /* Increase width */
+    height: 70%; /* Increase height */
+    padding: 30px; /* Adjust padding to fit larger size */
+    border-radius: 15px;
+    text-align: center;
+    display: none;
+    z-index: 1001;
+    overflow: auto; /* Add scroll if content overflows */
+    }
+
+
+    /* X Button to close the new screen */
+    .closeButton {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 2em;
+      color: white;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+    .closeButton:hover {
+      color: red;
+    }
+
+
+    /* Button styling 2 */
+    #actionButton2 {
+      position: fixed;
+      top: 545px;
+      left: 470px;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      background-color: #4CAF50;
+      opacity: 0;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+    #actionButton2:hover {
+      background-color: #45a049;
+    }
+    /* Style for the new screen */
+    .newScreen2 {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        width: 80%;  /* Increase width */
+        height: 70%; /* Increase height */
+        padding: 30px; /* Adjust padding to fit larger size */
+        border-radius: 15px;
+        text-align: center;
+        display: none;
+        z-index: 1001;
+        overflow: auto; /* Add scroll if content overflows */
+    }
+    /* X Button to close the new screen */
+    .closeButton2 {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 2em;
+      color: white;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+    .closeButton2:hover {
+      color: red;
+    }
+
+    /* Button styling 2 */
+    #actionButton3 {
+      position: fixed;
+      top: 590px;
+      left: 450px;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      background-color: #4CAF50;
+      opacity: 0;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+    #actionButton3:hover {
+      background-color: #45a049;
+    }
+    /* Style for the new screen */
+    .newScreen3 {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    font-size: 30px;
+    color: white;
+    width: 80%;
+    height: 70%;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: left;  /* Align text to the left */
+    display: none;
+    z-index: 1001;
+    overflow: auto; /* Add scroll if content overflows */
+    }
+
+    .newScreen3 h1 {
+    text-align: center; /* Center the heading */
+    }
+
+    .newScreen3 p {
+    margin-left: 20px; /* Add left margin for a neat appearance */
+    }
+
+    .newScreen3 ul {
+    list-style-type: disc; /* Use bullet points */
+    margin-left: 40px; /* Add more left margin for the list */
+    font-size: 1.1em; /* Slightly larger text for better readability */
+    }
+
+    /* X Button to close the new screen */
+    .closeButton3 {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          font-size: 2em;
+          color: white;
+          cursor: pointer;
+          border: none;
+          background: none;
+        }
+    .closeButton3:hover {
+          color: red;
+        }
+
+    #actionButton4 {
+      position: fixed;
+      top: 770px;
+      left: 442px;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      background-color: #4CAF50;
+      opacity: 0;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 1000;
+      width: 12%;
+      height: 10%;
+    }
+    #actionButton4:hover {
+      background-color: #45a049;
+    }
+    
+    .newScreen4 {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    width: 80%;  /* Increase width */
+    height: 70%; /* Increase height */
+    padding: 30px; /* Adjust padding to fit larger size */
+    border-radius: 15px;
+    text-align: center;
+    align-items: center;
+    display: none; /* Hidden by default */
+    z-index: 1001;
+    overflow: auto;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.animatedImage {
+    width: 150px; /* Adjust the size as needed */
+    position: absolute;
+    top: 30%;
+    left: 45%;
+    transform: translate(-30%, -30%);
+    animation: bounceFlip 7s ease-in-out infinite;
+}
+
+/* Bounce and Flip Animation */
+@keyframes bounceFlip {
+    0% {
+        transform: scale(1) rotateY(0deg) translateY(0);
+    }
+    25% {
+        transform: scale(1.1) rotateY(180deg) translateY(-20px);
+    }
+    50% {
+        transform: scale(1) rotateY(360deg) translateY(0);
+    }
+    75% {
+        transform: scale(1.1) rotateY(180deg) translateY(-10px);
+    }
+    100% {
+        transform: scale(1) rotateY(0deg) translateY(0);
+    }
+}
+
+
+/* Bounce and Flip Animation */
+@keyframes bounceFlip {
+    0% {
+        transform: scale(1) rotateY(0deg) translateY(0);
+    }
+    25% {
+        transform: scale(1.1) rotateY(180deg) translateY(-20px);
+    }
+    50% {
+        transform: scale(1) rotateY(360deg) translateY(0);
+    }
+    75% {
+        transform: scale(1.1) rotateY(180deg) translateY(-10px);
+    }
+    100% {
+        transform: scale(1) rotateY(0deg) translateY(0);
+    }
+
+
+}
+
+    /* X Button to close the new screen */
+    .closeButton4 {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 2em;
+      color: white;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+    .closeButton4:hover {
+      color: red;
+    }
+
+    #actionButton5 {
+      position: fixed;
+      top: 213px;
+      left: 380px;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      background-color: #4CAF50;
+      opacity: 0;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 1000;
+      width: 5%;
+      height: 12%;
+    }
+    #actionButton5:hover {
+      background-color: #45a049;
+    }
+
+    #actionButton6 {
+      position: fixed;
+      top: 360px;
+      left: 0px;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      background-color: #4CAF50;
+      opacity: 0;
+      color: white;
+      border: none;
+      border-radius: 0%;
+      cursor: pointer;
+      z-index: 1000;
+      width: 10%;
+      height: 12%;
+    }
+    #actionButton6:hover {
+      background-color: #45a049;
+    }
+
+
+    #actionButton7 {
+      position: fixed;
+      top: 840px;
+      left: 30px;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      background-color: #4CAF50;
+      opacity: 0;
+      color: white;
+      border: none;
+      border-radius: 0%;
+      cursor: pointer;
+      z-index: 1000;
+      width: 8%;
+      height: 11%;
+    }
+    #actionButton7:hover {
+      background-color: #45a049;
+    }
+
+    .newScreen7 {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    width: 20%;  /* Adjust width */
+    height: 70%; /* Adjust height */
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    display: none;
+    z-index: 1001;
+    overflow: hidden; /* Allows scrolling if content overflows */
+    text-align: left;
+}
+
+.contentParagraph {
+    margin: 0;
+    padding: 10px 0;
+    line-height: 1.6; /* Improves readability */
+    word-wrap: break-word; /* Ensures long words break correctly */
+    max-width: 100%; /* Prevents text from stretching too wide */
+}
+
+    /* X Button to close the new screen */
+    .closeButton7 {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 2em;
+      color: white;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+    .closeButton7:hover {
+      color: red;
+    }
+
+    /* Container for the logos and names */
+    /* Container for the logos and names */
+    #logoContainer {
+    display: flex;
+    flex-wrap: wrap; /* Allows logos to wrap to the next line if space is insufficient */
+    justify-content: space-between; /* Space logos evenly across the screen */
+    gap: 30px; /* Add space between each logo item */
+    padding: 20px;
+    }
+
+    /* Each logo and name pair */
+    .logoItem {
+    display: flex;
+    align-items: center; /* Vertically center the image and text */
+    max-width: 250px; /* Limit the width of each item to avoid overflow */
+    text-align: center; /* Center the text below the logo */
+    transition: transform 0.3s ease; /* Add smooth hover effect */
+    }
+
+    .logoItem:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    }
+
+    /* Styling for the logo image */
+    .logoImage {
+    width: 70px; /* Set a fixed width for the logos */
+    height: 70px; /* Set a fixed height for the logos */
+    margin-right: 15px; /* Space between the image and the name */
+    border-radius: 10px; /* Add rounded corners to the logo image */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    }
+
+    /* Styling for the logo name */
+    .logoName {
+    font-size: 14px;
+    font-weight: bold; /* Make the logo name stand out */
+    color: white; /* Dark gray text for better readability */
+    line-height: 1.5;
+    word-wrap: break-word; /* Break long names to fit within the container */
+    max-width: 180px; /* Prevent text from overflowing */
+    }
+
+    /* General slider styling */
+#volumeSlider {
+  -webkit-appearance: none; /* Remove default styling in WebKit browsers */
+  appearance: none;
+  width: 10%;
+  height: 8px;
+  background: #ffd1dc; /* Light pink background */
+  outline: none;
+  opacity: 0.8;
+  border-radius: 20px;
+  transition: opacity 0.2s;
+}
+
+#volumeSlider:hover {
+  opacity: 1; /* Increase opacity on hover */
+}
+
+/* Chrome, Safari, Edge, and Opera */
+#volumeSlider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Override default thumb */
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #ff69b4; /* Hot pink thumb */
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+    </style>
+
+
+  </style>
+</head>
+<body>
+
+
+
+  <audio id="backgroundMusic" src="music.mp3" loop></audio>
+  <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.1">
+
+  <div class="chatbox">
+    <span id="chatText"></span>
+  </div>
+
+  <button id="actionButton">Click Me!</button>
+
+  <button id="actionButton2">Click Me!</button>
+
+  <button id="actionButton3">Click Me!</button>
+
+  <button id="actionButton4">Click Me!</button>
+  <button id="actionButton5">Click Me!</button>
+  <button id="actionButton6">Click Me!</button>
+  <button id="actionButton7">Click Me!</button>
+  
+  <div class="newScreen" id="newScreen">
+    <button class="closeButton" id="closeButton">X</button>
+    <h1>Collection of Dustin's Favourite Pictures!</h1>
+    
+    <!-- Slideshow Container -->
+    <div id="slideshowContainer">
+      <img id="slideshowImage" src="" alt="Slideshow Image" style="width: 15%; max-height: 60vh; border-radius: 10px;">
+      <div style="margin-top: 10px;">
+        <button id="prevButton">Previous</button>
+        <button id="nextButton">Next</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="newScreen2" id="newScreen2">
+    <button class="closeButton2" id="closeButton2">X</button>
+    <h1>My baby's Orders!</h1>
+  
+    <div id="logoContainer">
+        <!-- Example of a logo and name pair -->
+        <div class="logoItem">
+          <img class="logoImage" src="https://cdn.discordapp.com/attachments/1138934111201923132/1306121133560696852/1200px-Starbucks_Corporation_Logo_2011.png?ex=67358398&is=67343218&hm=fca94800e2f1490103ee7a10179c1c9391e55a10890982d22e6839082470ba56&" alt="Logo 1">
+          <span class="logoName">Venti iced Matcha Latte w/ Oat Milk remove Cane Sugar Add White Mocha w/ Vanilla Sweet Cream Cold Foam <br><br>Venti passion tea lemonade w/ extra lemonade</span>
+        </div>
+        <div class="logoItem">
+          <img class="logoImage" src="https://cdn.discordapp.com/attachments/1138934111201923132/1306121415136645140/640px-McDonald27s_Golden_Arches.png?ex=673583db&is=6734325b&hm=7f2ddc970c0b234fec82fcef23e7dfef19801667222bd6a3f0928e7c138c433b&" alt="Logo 2">
+          <span class="logoName">Italian herbs and cheese, Ham, Extra Cheese, Toasted, Lettuce, Tomatoes (Rare Occasions), Extra Onions, Cucumber, Aioli Sauce, Honey Mustard Sauce</span>
+        </div>
+        <div class="logoItem">
+          <img class="logoImage" src="https://cdn.discordapp.com/attachments/1138934111201923132/1306121639402143844/subway.png?ex=67358411&is=67343291&hm=4aa312e29b24891df8995c53f9cd3f15e3f01882ab636430584b797ba6b1efde&" alt="Logo 3">
+          <span class="logoName">Italian herbs and cheese , Ham ,
+            Extra Cheese , Toasted , Lettuce , Tomatoes (Rare Occasions) , Extra Onions , Cucumber , Aioli Sauce , Honey Mustard Sauce </span>
+        </div>
+        <div class="logoItem">
+          <img class="logoImage" src="https://cdn.discordapp.com/attachments/1138934111201923132/1306121720935223306/1024px-Tim_Hortons_logo.png?ex=67358424&is=673432a4&hm=3fc71a621b5f8686ad4d389cbc683e39d4973dff0d7f88a2955e7016577342d5&" alt="Logo 4">
+          <span class="logoName">Everything bagel toasted w/ Cream cheese<br><br>Jalapeno bagel toasted w/ Butter and tomatoes<br><br>Chipotle Chicken Wrap<br><br>Chili Soup<br><br>Medium iced capp w/ oat milk and whipped cream<br><br>Medium peach quencher</span>
+        </div>
+        <!-- Add more logos and names here -->
+    </div>
+  </div>
+      
+
+  <div class="newScreen3" id="newScreen3">
+    <button class="closeButton3" id="closeButton3">X</button>
+    <h1>My Notes! DO NOT ENTER</h1>
+    <ul>
+        <li>kamis birthday is on november 14th!</li>
+        <li>make sure to tell her shes literally my favourite person in the whole universe</li>
+        <li>double check to know she knows that</li>
+        <li>text goodmorning and goodnight to her</li>
+        <li>she loves otters, koalas and sloths</li>
+        <li>shes always patient with me no matter what</li>
+        <li>i love it whenever she calls me randomly at times make sure to tell her abt that dusty</li>
+        <li>she always texts me whenever she can, when shes at school, work or just doing anything</li>
+        <li>shes acc so good at video games its crazy atp shes better than me in valorant</li>
+        <li>shes always there for me 24/7</li>
+        <li>her snores are so cuteeeeeeee</li>
+        <li>ever since ive met her shes actually been the only prettiest girl ive seen</li>
+        <li>did i say i love her today?</li>
+        <li>make sure to say i love her today</li>
+        <li>get her a new phone case</li>
+        <li>i cant wait for her birthday she deserves this celebration</li>
+        <li>she means the world to me</li>
+    </ul>
+</div>
+
+<div class="newScreen4" id="newScreen4">
+  <button class="closeButton4" id="closeButton4">X</button>
+  <img src="https://cdn.discordapp.com/attachments/1138934111201923132/1306374645296922747/image.png?ex=67366fb2&is=67351e32&hm=bddc7df9dece2be99ba3c18bfee2e9a4c6bd5665a1ea0f2355de41aa2baa4b8e&" 
+       class="animatedImage" alt="Centered Image">
+</div>
+
+<div class="newScreen7" id="newScreen7">
+  <button class="closeButton7" id="closeButton7">X</button>
+  <p class="contentParagraph">Hi kami I don’t even know where to start this, im just gonna start off by saying HAPPY BIRTHDAY!!! You’re finally 19 and legal heh. I'm actually so happy with how far you've come in life. To doing like amazing in school and being the best work in progress nurse to like being such a beautiful mature woman. I remember the first time I met you were somewhat intimidating because of like how much maturity you had but seeing you now, you are actually the sweetest girl I have ever met, you do anything to make anyone feel comfortable, and just in general super respectful to anyone you meet ever since we started dating you’ve shown me nothing but love and you surrounded me with people that care for me too, and I apologize for taking advantage of that and thats something I will always regret but now I want to try my best to make it up for you. I want this birthday to feel like finding aliens on a different planet (out of this world) get it, I want you to be super duper happy after everything you’ve done everyone especially for me. I love you so so so so so so so much and I hope hello kitty was nice to you I made sure to tell her to be extra nice, and I hope you liked the scavenger hunt I made for u! Hehehe. I love you so much you beautiful woman and nothing will ever change how I feel about you. Happy birthday! I love you so much baby. <br> - dusty</p>
+</div>
+
+
+<script>
+
+function showNewScreen() {
+    const newScreen = document.getElementById("newScreen4");
+    newScreen.style.display = "block";
+}
+
+document.getElementById("closeButton4").onclick = function() {
+    document.getElementById("newScreen4").style.display = "none";
+};
+
+  window.addEventListener("load", () => {
+    const audio = document.getElementById("backgroundMusic");
+    const volumeSlider = document.getElementById("volumeSlider");
+
+    audio.loop = true;
+    audio.volume = volumeSlider.value; // Set initial volume to slider value
+
+    // Play the audio with a click if needed
+    audio.play().catch(() => {
+      document.addEventListener("click", () => {
+        audio.play();
+      }, { once: true });
+    });
+
+    // Update audio volume when the slider value changes
+    volumeSlider.addEventListener("input", () => {
+        audio.volume = volumeSlider.value;
+    });
+});
+
+
+  const firstText = "Hallo Kami! I heard you finished the scavanger hunt Goodjob!!... Also... Happy Birthday!!!!";
+  const firstHalfText = "It's so nice to finally meet you! My name is Hello kitty, my friends over here are Bubbler and Mellow.";
+  const secondText = "Dustin told me so much about you! and he said that you are one of a kind.";
+  const thirdText = "Hes been working on me since his birthday! he knows you are the only thing that matters to him so please make sure to thank him!";
+  const fourthText = "He filled up this room for you, and he said to me that its filled with things that make him happy and things that remind him of you.";
+  const fifthText = "";  // Message after button click
+  const clickedActionButtonText = "*open* These are Dustin's Favourite pictures of you Kami! (You're very pretty)";
+  const clickedActionButton2Text = "*open* This is Dustin's Orders book, to keep track of what you like to eat!"; // Message for actionButton2
+  const clickedActionButton3Text = "*open* Uhm, These are his notes... You can look but do it fast!"; // Message for actionButton3
+  const clickedActionButton4Text = " *click* Secret Item Unlocked!"; // Message for actionButton3
+  const clickedActionButton5Text = " *click* He wanted this mirror to show how when you look in the mirror, to be proud of the beautiful person you are Kami."; // Message for actionButton3
+  const clickedActionButton6Text = " *click* A reminder to Dustin that every time he talks to or sees you it makes his day!"; // Message for actionButton3
+  const clickedActionButton7Text = "*open* Hes been working on this letter here.. He sure does love you!"; // Message for actionButton3
+  let index = 0;
+  let currentText = firstText; // Start with the first text
+  const speed = 100; // Speed of typing (in milliseconds)
+
+  const imageUrls = [
+    'https://cdn.discordapp.com/attachments/1138934111201923132/1306116373331578940/IMG_2357.png?ex=67357f29&is=67342da9&hm=8717e83d6ef9836ced1eac59dbcd110d9fad0043754b98ba6d1566aad14b1096&',
+    'https://cdn.discordapp.com/attachments/1138934111201923132/1306116372996296795/IMG_2960.jpg?ex=67357f29&is=67342da9&hm=1a1b53739b1132d79585cbd87917d12c47db063bcfcd29d95a8a7cc0ae7b3cd5&',
+    'https://cdn.discordapp.com/attachments/1138934111201923132/1306116372727726124/IMG_3131.jpg?ex=67357f29&is=67342da9&hm=4868e466aa12281abdb21ca7aaaaf59a4a110c63e33f2a273bf8b56bb535de4b&',
+    "https://cdn.discordapp.com/attachments/1138934111201923132/1306116372144590889/IMG_0006.jpg?ex=67357f29&is=67342da9&hm=b6bd2207292146f09be48330cb048ad7ba9a46eee5d70532743771ffd97a1c0a&",
+    "https://cdn.discordapp.com/attachments/1138934111201923132/1306116371578621962/DEABEF2C-3DBE-42A4-B8C3-04E954A09711.jpg?ex=67357f29&is=67342da9&hm=538c527d374a6791195d387e4ffc0a6474a37a36c2293506ab0e2b8aa0a84f32&",
+    "https://cdn.discordapp.com/attachments/1138934111201923132/1306116371301662820/9812DC79-EC17-4278-9861-150C22BC7A48.jpg?ex=67357f29&is=67342da9&hm=9e108d435fddcb46549db5f3e09bbb4b296beee68685ad5dda4a1a2de8e9f6fd&",
+    "https://cdn.discordapp.com/attachments/1138934111201923132/1306116370676584489/IMG_3597.png?ex=67357f29&is=67342da9&hm=34475824c6c2b816678549fb6828e000018aaec8f4c241bbc594b3795d06578a&",
+    "https://cdn.discordapp.com/attachments/1138934111201923132/1306116370072866878/IMG_3360.jpg?ex=67357f29&is=67342da9&hm=559da4a1083c65596eeb75c2c90d31e48739c627322a4cb3e69faf28854b3c33&",
+    "https://cdn.discordapp.com/attachments/1138934111201923132/1306116369485529088/IMG_3357.jpg?ex=67357f28&is=67342da8&hm=3483ab50f704b67fe1132b421d6ceb55a95c28242a31cbe80465e827b65aa133&",
+    "https://cdn.discordapp.com/attachments/1138934111201923132/1306117764678684732/IMG_1649.png?ex=67358075&is=67342ef5&hm=5bb557b4c28db2431a9d0ba8c37a0862c6e88ef0403f0fbad2bbb60cdd74771c&",
+    "https://cdn.discordapp.com/attachments/1138934111201923132/1306117764314042378/IMG_1603.png?ex=67358075&is=67342ef5&hm=2784b3545add649edd6589681a5af27b57c69cee542641d88c3d1fa1d65d67d2&",
+    "https://cdn.discordapp.com/attachments/1138934111201923132/1306117763911258152/IMG_1230.png?ex=67358075&is=67342ef5&hm=5f6249cb25977714076099675f80811213af82f72288e3d7a0fa33be67ca0696&",
+    "https://cdn.discordapp.com/attachments/1138934111201923132/1306117763546218497/IMG_1201.jpg?ex=67358075&is=67342ef5&hm=f80ad3c7dfd8eb0e46b9bc65542c8b6b78ca587166704c73123d966f13bfe49b&",
+    "https://cdn.discordapp.com/attachments/1138934111201923132/1306117763198226432/5348496B-CA7D-4522-8C97-C4AD636BB292.jpg?ex=67358075&is=67342ef5&hm=064c9dec2a8a97548cdb7ee8eaa6d72c84245749977750dbaa790d061b533d94&",
+    "https://cdn.discordapp.com/attachments/1138934111201923132/1306117762908946513/IMG_0571.jpg?ex=67358075&is=67342ef5&hm=bca345a185f7d0ad09fa5db99ef41ab02b7ec41b584df78f6e6fe624314c257a&",
+    "https://cdn.discordapp.com/attachments/1138934111201923132/1306117762560561203/IMG_0047.png?ex=67358075&is=67342ef5&hm=d3349b91e938bf0c2c95d963ceaa9a462fc20999c51074f4a2b24fea1351ae86&",
+    "https://cdn.discordapp.com/attachments/1138934111201923132/1306117762002976858/IMG_7926.png?ex=67358074&is=67342ef4&hm=eec46c2cfbfe00db740b1b2c919358c54da99e67d082649b97aa88e21d813b0d&"
+    // Add more image URLs as needed
+  ];
+
+  let currentImageIndex = 0;
+
+  // Function to update the slideshow image
+  function updateSlideshowImage() {
+    document.getElementById("slideshowImage").src = imageUrls[currentImageIndex];
+  }
+
+  // Show the first image initially
+  document.getElementById("actionButton").addEventListener("click", function() {
+    currentImageIndex = 0;
+    updateSlideshowImage();
+    document.getElementById("newScreen").style.display = "block";
+  });
+
+  // Event listeners for "Next" and "Previous" buttons
+  document.getElementById("nextButton").addEventListener("click", function() {
+    currentImageIndex = (currentImageIndex + 1) % imageUrls.length;
+    updateSlideshowImage();
+  });
+
+  document.getElementById("prevButton").addEventListener("click", function() {
+    currentImageIndex = (currentImageIndex - 1 + imageUrls.length) % imageUrls.length;
+    updateSlideshowImage();
+  });
+
+  // Close button
+  document.getElementById("closeButton").addEventListener("click", function() {
+    document.getElementById("newScreen").style.display = "none";
+  });
+
+  function typeWriter() {
+    if (index < currentText.length) {
+      document.getElementById("chatText").innerHTML += currentText.charAt(index);
+      index++;
+      setTimeout(typeWriter, speed); // Call the function recursively with delay
+    } else {
+      setTimeout(deleteText, 2000); // Wait for 1 second after typing before starting to delete
+    }
+  }
+
+  function deleteText() {
+    const text = document.getElementById("chatText").innerHTML;
+    if (text.length > 0) {
+      document.getElementById("chatText").innerHTML = text.substring(0, text.length - 1); // Remove the last character
+      setTimeout(deleteText, 30); // Call itself recursively with delay to delete each character
+    } else {
+      // Switch to the next text and start typing again
+      if (currentText === firstText) {
+        currentText = firstHalfText;
+      } else if (currentText === firstHalfText) {
+        currentText = secondText;
+      } else if (currentText === secondText) {
+        currentText = thirdText;
+      } else if (currentText === thirdText) {
+        currentText = fourthText;
+      } else if (currentText === fourthText) {
+        currentText = fifthText;
+      } else {
+        return; // End of the sequence
+      }
+      index = 0; // Reset index for new text
+      typeWriter(); // Start typing the next text
+    }
+  }
+
+  // Start typing when the page loads
+  window.onload = function() {
+    setTimeout(() => {
+        typeWriter();
+    }, 4000); // 3000 milliseconds = 3 seconds
+};
+
+
+  // Handle the actionButton click
+  document.getElementById("actionButton").addEventListener("click", function() {
+    // Display the new message and show the screen
+    currentText = clickedActionButtonText;
+    index = 0;
+    document.getElementById("chatText").innerHTML = ''; // Clear any previous text
+    typeWriter(); // Start typing the "clicked!" message
+
+    // Show the new screen
+    document.getElementById("newScreen").style.display = "block";
+  });
+
+  // Handle the actionButton2 click
+  document.getElementById("actionButton2").addEventListener("click", function() {
+    // Set the specific message for actionButton2
+    currentText = clickedActionButton2Text;
+    index = 0;
+    document.getElementById("chatText").innerHTML = ''; // Clear any previous text
+    typeWriter(); // Start typing the "clicked actionbutton2" message
+
+    // Show the new screen
+    document.getElementById("newScreen2").style.display = "block";
+  });
+
+  // Handle the actionButton3 click
+  document.getElementById("actionButton3").addEventListener("click", function() {
+    // Set the specific message for actionButton3
+    currentText = clickedActionButton3Text;
+    index = 0;
+    document.getElementById("chatText").innerHTML = ''; // Clear any previous text
+    typeWriter(); // Start typing the "clicked actionbutton3" message
+
+    // Show the new screen
+    document.getElementById("newScreen3").style.display = "block";
+  });
+
+  document.getElementById("actionButton4").addEventListener("click", function() {
+    // Set the specific message for actionButton3
+    currentText = clickedActionButton4Text;
+    index = 0;
+    document.getElementById("chatText").innerHTML = ''; // Clear any previous text
+    typeWriter(); // Start typing the "clicked actionbutton3" message
+
+    // Show the new screen
+    document.getElementById("newScreen4").style.display = "block";
+  });
+
+  document.getElementById("actionButton5").addEventListener("click", function() {
+    // Set the specific message for actionButton3
+    currentText = clickedActionButton5Text;
+    index = 0;
+    document.getElementById("chatText").innerHTML = ''; // Clear any previous text
+    typeWriter(); // Start typing the "clicked actionbutton3" message
+
+    // Show the new screen
+
+  });
+
+  document.getElementById("actionButton6").addEventListener("click", function() {
+    // Set the specific message for actionButton3
+    currentText = clickedActionButton6Text;
+    index = 0;
+    document.getElementById("chatText").innerHTML = ''; // Clear any previous text
+    typeWriter(); // Start typing the "clicked actionbutton3" message
+
+    // Show the new screen
+
+  });
+
+  document.getElementById("actionButton7").addEventListener("click", function() {
+    // Set the specific message for actionButton3
+    currentText = clickedActionButton7Text;
+    index = 0;
+    document.getElementById("chatText").innerHTML = ''; // Clear any previous text
+    typeWriter(); // Start typing the "clicked actionbutton3" message
+
+    // Show the new screen
+    document.getElementById("newScreen7").style.display = "block";
+  });
+
+
+
+
+
+  // Close the screens when X is clicked
+  document.getElementById("closeButton").addEventListener("click", function() {
+    document.getElementById("newScreen").style.display = "none";
+  });
+  document.getElementById("closeButton2").addEventListener("click", function() {
+    document.getElementById("newScreen2").style.display = "none";
+  });
+  document.getElementById("closeButton3").addEventListener("click", function() {
+    document.getElementById("newScreen3").style.display = "none";
+  });
+  document.getElementById("closeButton4").addEventListener("click", function() {
+    document.getElementById("newScreen4").style.display = "none";
+  });
+  document.getElementById("closeButton7").addEventListener("click", function() {
+    document.getElementById("newScreen7").style.display = "none";
+  });
+</script>
+
+
+</body>
+</html>
