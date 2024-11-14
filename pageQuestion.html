@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kami's Bday</title>
+    <style>
+        @font-face {
+            font-family: 'newFont';
+            src: url('fonts/newFont.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body { 
+            text-align: center; 
+            margin-top: 20%; 
+            font-family: 'newFont';
+            background-color: #c095e7;
+            color: #4d2a7f;
+            overflow: hidden;
+        }
+        button { 
+            padding: 10px 20px; 
+            font-size: 1.2em;
+            cursor: pointer;
+            margin: 20px;
+            background-color: #7a4ea3;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: left 0.5s ease, top 0.5s ease;
+            position: relative;
+        }
+        button:hover {
+            background-color: #5a3775;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="questionText">Do you love me?</h1>
+    <button onclick="window.location.href='pageDays.html'">Yes</button>
+    <button id="noButton">No</button>
+
+    <script>
+        const noButton = document.getElementById('noButton');
+        const questionText = document.getElementById('questionText');
+        let hoverAttempts = 0;
+
+        noButton.addEventListener('mouseenter', () => {
+            hoverAttempts++;
+
+            // After 10 hover attempts, change the question text
+            if (hoverAttempts >= 10) {
+                questionText.textContent = "ok u rlly hate me that much dud";
+                return; // Stop further position changesg
+            }
+
+            // Generate random positions for the "No" button within the window bounds
+            const randomX = Math.floor(Math.random() * (window.innerWidth - noButton.offsetWidth));
+            const randomY = Math.floor(Math.random() * (window.innerHeight - noButton.offsetHeight));
+
+            // Apply new positions with smooth animation
+            noButton.style.position = 'absolute';
+            noButton.style.left = `${randomX}px`;
+            noButton.style.top = `${randomY}px`;
+        });
+    </script>
+</body>
+</html>
