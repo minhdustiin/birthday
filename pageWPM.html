@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kami's Bday</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #c095e7;
+        }
+        #promptContainer {
+            width: 80%;
+            margin: 0 auto;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+            line-height: 1.5em;
+            word-wrap: break-word;
+            text-align: left;
+            user-select: none;
+        }
+        .highlight {
+            color: pink;
+            font-weight: bold;
+        }
+        #inputBox {
+            width: 60%;
+            padding: 10px;
+            font-size: 1.1em;
+            border: 2px solid #333;
+            outline: none;
+        }
+        #timer {
+            font-size: 1.2em;
+            margin-top: 20px;
+        }
+        #result {
+            font-size: 1.4em;
+            margin-top: 20px;
+            color: #4d2a7f;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Kamielle's Typing Test</h1>
+    <p>Since you are a keyboard warrior on phone... Can you beat my pc keyboard test to pass?</p>
+    <div id="promptContainer">
+        <div id="promptText"></div>
+    </div>
+    <input type="text" id="inputBox" placeholder="Start typing here...">
+    <div id="timer">30s</div>
+    <div id="result"></div>
+    <div id="finalMessage"></div>
+    <button id="nextButton" style="display: none;" onclick="nextTest()">Next</button>
+    <button id="retryButton" style="display: none;" onclick="retryTest()">Retry</button>
+
+
+    <script>
+        const promptText = "my name is kamielle and i love this boy named dustin so much he does so much for me and he is just the best boyfriend ever to be honest what other man in this world would be able to do this for his girlfriend he is honestly the sweetest cutest hottest little boy i have ever met or in other words he is my master and i will serve him to whatever he needs";
+        const promptDisplay = document.getElementById('promptText');
+        const inputBox = document.getElementById('inputBox');
+        const timerDisplay = document.getElementById('timer');
+        const resultDisplay = document.getElementById('result');
+        
+        let timer;
+        let timeLeft = 30;
+        let started = false;
+        let startTime;
+        
+        // Display prompt text with characters for highlighting
+        function displayPrompt() {
+            promptDisplay.innerHTML = '';
+            for (let i = 0; i < promptText.length; i++) {
+                const span = document.createElement('span');
+                span.textContent = promptText[i];
+                promptDisplay.appendChild(span);
+            }
+        }
+
+        // Start the typing test
+        function startTest() {
+            if (!started) {
+                started = true;
+                inputBox.disabled = false;
+                inputBox.focus();
+                startTime = Date.now();  // Record the start time
+                timer = setInterval(updateTimer, 1000);
+            }
+        }
+
+        // Update the timer every second
+        function updateTimer() {
+            if (timeLeft > 0) {
+                timeLeft--;
+                timerDisplay.textContent = `${timeLeft}s`;
+            } else {
+                endTest();
+            }
+        }
+
+        // End the test and calculate WPM
+        // End the test and calculate WPM
+// End the test and calculate WPM
+function endTest() {
+    clearInterval(timer);  // Stop the timer immediately
+    inputBox.disabled = true;  // Disable the input box so the user can't type more
+
+    const typedText = inputBox.value.trim();
+    const wordsTyped = typedText.split(" ").length;
+    const elapsedTime = (Date.now() - startTime) / 1000;  // Time taken in seconds
+    const minutes = elapsedTime / 60;  // Convert time to minutes
+    const wpm = Math.floor(wordsTyped / minutes);  // Calculate WPM based on real time
+    resultDisplay.textContent = `Your WPM is: ${wpm}`;
+
+    // Show message based on WPM
+    const finalMessage = document.getElementById("finalMessage");
+    const nextButton = document.getElementById("nextButton");
+    const retryButton = document.getElementById("retryButton");
+
+    // Stop further calculation as soon as message is shown
+    if (wpm >= 95) {
+        finalMessage.textContent = "Wow! You really are a fast keyboard warrior!";
+        nextButton.style.display = "inline-block";  // Show next button
+    } else {
+        finalMessage.textContent = "Try again!";
+        retryButton.style.display = "inline-block";  // Show retry button
+    }
+}
+
+// Next button action (you can modify this function for your needs)
+function nextTest() {
+    // You can redirect to another page or reset the test here
+    window.location.href = "pageQuestion.html";  // Replace with your URL or reset logic
+}
+
+// Retry button action
+function retryTest() {
+    // Reset everything to retry the test
+    timeLeft = 30;
+    started = false;
+    resultDisplay.textContent = '';
+    finalMessage.textContent = '';
+    nextButton.style.display = "none";
+    retryButton.style.display = "none";
+    displayPrompt();
+    inputBox.value = '';  // Clear input box
+    inputBox.disabled = false;
+    inputBox.focus();  // Focus back to input box
+    startTime = Date.now();  // Restart the timer
+    timer = setInterval(updateTimer, 1000);  // Start the timer again
+}
+
+
+// Retry button action
+function retryTest() {
+    // Reset everything to retry the test
+    timeLeft = 30;
+    started = false;
+    resultDisplay.textContent = '';
+    finalMessage.textContent = '';
+    nextButton.style.display = "none";
+    retryButton.style.display = "none";
+    displayPrompt();
+    inputBox.value = '';  // Clear input box
+    inputBox.disabled = false;
+    inputBox.focus();  // Focus back to input box
+    startTime = Date.now();  // Restart the timer
+    timer = setInterval(updateTimer, 1000);  // Start the timer again
+}
+
+
+        // Check typed text against prompt text
+        function checkTyping() {
+            const typedText = inputBox.value;
+            for (let i = 0; i < promptText.length; i++) {
+                const charSpan = promptDisplay.childNodes[i];
+                if (i < typedText.length) {
+                    if (typedText[i] === promptText[i]) {
+                        charSpan.classList.add('highlight');
+                    } else {
+                        charSpan.classList.remove('highlight');
+                    }
+                } else {
+                    charSpan.classList.remove('highlight');
+                }
+            }
+            
+            // End test if prompt is completed
+            if (typedText === promptText) {
+                endTest();
+            }
+        }
+
+        // Event listeners
+        inputBox.addEventListener('input', checkTyping);
+        inputBox.addEventListener('focus', startTest);
+
+        // Initialize
+        displayPrompt();
+    </script>
+
+</body>
+</html>
